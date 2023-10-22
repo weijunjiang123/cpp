@@ -2,26 +2,57 @@
 
 using namespace std;
 
-class Box{
+class Box
+{
 
-    public:
-    double getVolume(void){
+public:
+    Box(double h, double w, double l) : height(h), weight(w), length(l){};
+    Box() : height(0), weight(0), length(0){};
+    double getVolume(void) const
+    {
         return height * weight * length;
     }
 
-    void setHeight(double h){
-        height = h;
+    double getHeight() const
+    {
+        return height;
     }
 
-    void setWeight(double w){
-        weight = w;
+    double getWeight() const
+    {
+        return weight;
     }
 
-    void setLength(double l){
-        length = l;
+    double getLength() const
+    {
+        return length;
     }
 
-    Box operator+(Box& b){
+    void show() const
+    {
+        cout << "height: " << height << " ";
+        cout << "weight: " << weight << " ";
+        cout << "length: " << length<< endl;
+    }
+
+    Box &operator++(int)
+    {
+        this->height++;
+        this->weight++;
+        this->length++;
+        return *this;
+    }
+
+    Box &operator++()
+    {
+        this->height++;
+        this->weight++;
+        this->length++;
+        return *this;
+    }
+
+    Box operator+(Box &b)
+    {
         Box box;
         box.length = this->length + b.length;
         box.weight = this->weight + b.weight;
@@ -29,30 +60,28 @@ class Box{
         return box;
     }
 
-    private:
+private:
     double height;
     double weight;
     double length;
 };
 
-int main(){
-    Box box1;
-    Box box2;
+int main()
+{
+    Box box1(2.0, 3.0, 4.0);
+    Box box2(5.0, 3.0, 4.0);
     Box box3;
 
+    box1.show();
+    box2.show();
     double volume = 0.0;
 
-    box1.setHeight(1.0);
-    box1.setWeight(2.0);
-    box1.setLength(3.0);
-
-    box2.setHeight(4.0);
-    box2.setLength(5.0);
-    box2.setWeight(6.0);
-
     box3 = box1 + box2;
-    volume =  box3.getVolume();
-    cout << "volume of box3 is: " << volume << endl; 
+    box3.show();
+    box3++;
+    box3.show();
+    volume = box3.getVolume();
+    cout << "volume of box3 is: " << volume << endl;
 
     return 0;
 }
