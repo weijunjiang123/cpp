@@ -4,7 +4,12 @@ using namespace std;
 class Complex
 {
 public:
+    // 构造函数
     Complex(double r = 0, double i = 0) : real(r), imag(i) {}
+    // 析构函数
+    ~Complex() {}
+
+    // 重载运算符
     Complex operator+(const Complex &c2) const;
     Complex operator-(const Complex &c2) const;
     void display() const;
@@ -14,10 +19,12 @@ private:
     double imag; // 复数虚部变量
 };
 
+// 重载+运算符，实现复数加法运算
 Complex Complex::operator+(const Complex &c2) const
 {
     return Complex(real + c2.real, imag + c2.imag);
 }
+// 重载-运算符，实现复数减法运算
 Complex Complex::operator-(const Complex &c2) const
 {
     return Complex(real - c2.real, imag - c2.imag);

@@ -6,8 +6,14 @@ class Box
 {
 
 public:
+    // 构造函数
     Box(double h, double w, double l) : height(h), weight(w), length(l){};
     Box() : height(0), weight(0), length(0){};
+    
+    //构析函数
+    ~Box(){};
+
+    // 对外的接口
     double getVolume(void) const
     {
         return height * weight * length;
@@ -30,19 +36,25 @@ public:
 
     void show() const
     {
-        cout << "height: " << height << " ";
-        cout << "weight: " << weight << " ";
+        cout << "height: " << height << "\t";
+        cout << "weight: " << weight << "\t";
         cout << "length: " << length<< endl;
     }
 
+    // 重载后置++：先返回，再自增
     Box &operator++(int)
     {
+        Box box;
+        box.height = this->height;
+        box.weight = this->weight;
+        box.length = this->length;
         this->height++;
         this->weight++;
         this->length++;
         return *this;
     }
 
+    // 重载前置++：先自增，再返回
     Box &operator++()
     {
         this->height++;
@@ -51,6 +63,7 @@ public:
         return *this;
     }
 
+    // 重载加法运算符
     Box operator+(Box &b)
     {
         Box box;

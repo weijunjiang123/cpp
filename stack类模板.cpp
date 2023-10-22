@@ -4,9 +4,12 @@
 #include <string>
 #include <stdexcept>
 using namespace std;
+
+// 定义一个通用的类栈
 template <class T>
 class Stack
 {
+
 private:
     vector<T> elems; // 元素
 
@@ -19,12 +22,16 @@ public:
         return elems.empty();
     }
 };
+
+// 入栈
 template <class T>
 void Stack<T>::push(T const &elem)
 {
     // 追加传入元素的副本
     elems.push_back(elem);
 }
+
+// 出栈
 template <class T>
 void Stack<T>::pop()
 {
@@ -35,6 +42,8 @@ void Stack<T>::pop()
     // 删除最后一个元素
     elems.pop_back();
 }
+
+// 返回栈顶元素
 template <class T>
 T Stack<T>::top() const
 {
@@ -45,6 +54,7 @@ T Stack<T>::top() const
     // 返回最后一个元素的副本
     return elems.back();
 }
+
 int main()
 {
     try
@@ -62,6 +72,7 @@ int main()
         stringStack.pop();
         stringStack.pop();
     }
+    // 捕获异常并处理，打印出错消息。
     catch (exception const &ex)
     {
         cerr << "Exception: " << ex.what() << endl;
