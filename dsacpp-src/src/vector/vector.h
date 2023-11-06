@@ -8,60 +8,71 @@
 
 #pragma once
 
-using Rank = unsigned int; //ÖÈ
-#define DEFAULT_CAPACITY  3 //Ä¬ÈÏµÄ³õÊ¼ÈÝÁ¿£¨Êµ¼ÊÓ¦ÓÃÖÐ¿ÉÉèÖÃÎª¸ü´ó£©
+using Rank = unsigned int; // ï¿½ï¿½
+#define DEFAULT_CAPACITY 3 // Ä¬ï¿½ÏµÄ³ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½Ó¦ï¿½ï¿½ï¿½Ð¿ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½
 
-template <typename T> class Vector { //ÏòÁ¿Ä£°åÀà
+template <typename T>
+class Vector
+{ // ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½
 protected:
-   Rank _size; Rank _capacity;  T* _elem; //¹æÄ£¡¢ÈÝÁ¿¡¢Êý¾ÝÇø
-   void copyFrom ( T const* A, Rank lo, Rank hi ); //¸´ÖÆÊý×éÇø¼äA[lo, hi)
-   void expand(); //¿Õ¼ä²»×ãÊ±À©ÈÝ
-   void shrink(); //×°ÌîÒò×Ó¹ýÐ¡Ê±Ñ¹Ëõ
-   bool bubble ( Rank lo, Rank hi ); //É¨Ãè½»»»
-   void bubbleSort ( Rank lo, Rank hi ); //ÆðÅÝÅÅÐòËã·¨
-   Rank maxItem ( Rank lo, Rank hi ); //Ñ¡È¡×î´óÔªËØ
-   void selectionSort ( Rank lo, Rank hi ); //Ñ¡ÔñÅÅÐòËã·¨
-   void merge ( Rank lo, Rank mi, Rank hi ); //¹é²¢Ëã·¨
-   void mergeSort ( Rank lo, Rank hi ); //¹é²¢ÅÅÐòËã·¨
-   void heapSort ( Rank lo, Rank hi ); //¶ÑÅÅÐò£¨ÉÔºó½áºÏÍêÈ«¶Ñ½²½â£©
-   Rank partition ( Rank lo, Rank hi ); //Öáµã¹¹ÔìËã·¨
-   void quickSort ( Rank lo, Rank hi ); //¿ìËÙÅÅÐòËã·¨
-   void shellSort ( Rank lo, Rank hi ); //Ï£¶ûÅÅÐòËã·¨
+   Rank _size;
+   Rank _capacity;
+   T *_elem;                                    // ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+   void copyFrom(T const *A, Rank lo, Rank hi); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½A[lo, hi)
+   void expand();                               // ï¿½Õ¼ä²»ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½
+   void shrink();                               // ×°ï¿½ï¿½ï¿½ï¿½ï¿½Ó¹ï¿½Ð¡Ê±Ñ¹ï¿½ï¿½
+   bool bubble(Rank lo, Rank hi);               // É¨ï¿½è½»ï¿½ï¿½
+   void bubbleSort(Rank lo, Rank hi);           // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã·¨
+   Rank maxItem(Rank lo, Rank hi);              // Ñ¡È¡ï¿½ï¿½ï¿½Ôªï¿½ï¿½
+   void selectionSort(Rank lo, Rank hi);        // Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã·¨
+   void merge(Rank lo, Rank mi, Rank hi);       // ï¿½é²¢ï¿½ã·¨
+   void mergeSort(Rank lo, Rank hi);            // ï¿½é²¢ï¿½ï¿½ï¿½ï¿½ï¿½ã·¨
+   void heapSort(Rank lo, Rank hi);             // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôºï¿½ï¿½ï¿½ï¿½ï¿½È«ï¿½Ñ½ï¿½ï¿½â£©
+   Rank partition(Rank lo, Rank hi);            // ï¿½ï¿½ã¹¹ï¿½ï¿½ï¿½ã·¨
+   void quickSort(Rank lo, Rank hi);            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã·¨
+   void shellSort(Rank lo, Rank hi);            // Ï£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã·¨
 public:
-// ¹¹Ôìº¯Êý
-   Vector ( Rank c = DEFAULT_CAPACITY, Rank s = 0, T v = 0 ) //ÈÝÁ¿Îªc¡¢¹æÄ£Îªs¡¢ËùÓÐÔªËØ³õÊ¼Îªv
-   { _elem = new T[_capacity = c]; for ( _size = 0; _size < s; _elem[_size++] = v ); } //s<=c
-   Vector ( T const* A, Rank n ) { copyFrom ( A, 0, n ); } //Êý×éÕûÌå¸´ÖÆ
-   Vector ( T const* A, Rank lo, Rank hi ) { copyFrom ( A, lo, hi ); } //Çø¼ä
-   Vector ( Vector<T> const& V ) { copyFrom ( V._elem, 0, V._size ); } //ÏòÁ¿ÕûÌå¸´ÖÆ
-   Vector ( Vector<T> const& V, Rank lo, Rank hi ) { copyFrom ( V._elem, lo, hi ); } //Çø¼ä
-// Îö¹¹º¯Êý
-   ~Vector() { delete [] _elem; } //ÊÍ·ÅÄÚ²¿¿Õ¼ä
-// Ö»¶Á·ÃÎÊ½Ó¿Ú
-   Rank size() const { return _size; } //¹æÄ£
-   bool empty() const { return !_size; } //ÅÐ¿Õ
-   Rank find ( T const& e ) const { return find ( e, 0, _size ); } //ÎÞÐòÏòÁ¿ÕûÌå²éÕÒ
-   Rank find ( T const& e, Rank lo, Rank hi ) const; //ÎÞÐòÏòÁ¿Çø¼ä²éÕÒ
-   Rank search ( T const& e ) const //ÓÐÐòÏòÁ¿ÕûÌå²éÕÒ
-   { return ( 0 >= _size ) ? -1 : search ( e, 0, _size ); }
-   Rank search ( T const& e, Rank lo, Rank hi ) const; //ÓÐÐòÏòÁ¿Çø¼ä²éÕÒ
-// ¿ÉÐ´·ÃÎÊ½Ó¿Ú
-   T& operator[] ( Rank r ); //ÖØÔØÏÂ±ê²Ù×÷·û£¬¿ÉÒÔÀàËÆÓÚÊý×éÐÎÊ½ÒýÓÃ¸÷ÔªËØ
-   const T& operator[] ( Rank r ) const; //½öÏÞÓÚ×öÓÒÖµµÄÖØÔØ°æ±¾
-   Vector<T> & operator= ( Vector<T> const& ); //ÖØÔØ¸³Öµ²Ù×÷·û£¬ÒÔ±ãÖ±½Ó¿ËÂ¡ÏòÁ¿
-   T remove ( Rank r ); //É¾³ýÖÈÎªrµÄÔªËØ
-   Rank remove ( Rank lo, Rank hi ); //É¾³ýÖÈÔÚÇø¼ä[lo, hi)Ö®ÄÚµÄÔªËØ
-   Rank insert ( Rank r, T const& e ); //²åÈëÔªËØ
-   Rank insert ( T const& e ) { return insert ( _size, e ); } //Ä¬ÈÏ×÷ÎªÄ©ÔªËØ²åÈë
-   void sort ( Rank lo, Rank hi ); //¶Ô[lo, hi)ÅÅÐò
-   void sort() { sort ( 0, _size ); } //ÕûÌåÅÅÐò
-   void unsort ( Rank lo, Rank hi ); //¶Ô[lo, hi)ÖÃÂÒ
-   void unsort() { unsort ( 0, _size ); } //ÕûÌåÖÃÂÒ
-   Rank deduplicate(); //ÎÞÐòÈ¥ÖØ
-   Rank uniquify(); //ÓÐÐòÈ¥ÖØ
-// ±éÀú
-   void traverse ( void (* ) ( T& ) ); //±éÀú£¨Ê¹ÓÃº¯ÊýÖ¸Õë£¬Ö»¶Á»ò¾Ö²¿ÐÔÐÞ¸Ä£©
-   template <typename VST> void traverse ( VST& ); //±éÀú£¨Ê¹ÓÃº¯Êý¶ÔÏó£¬¿ÉÈ«¾ÖÐÔÐÞ¸Ä£©
-}; //Vector
+   // ï¿½ï¿½ï¿½ìº¯ï¿½ï¿½
+   Vector(Rank c = DEFAULT_CAPACITY, Rank s = 0, T v = 0) // ï¿½ï¿½ï¿½ï¿½Îªcï¿½ï¿½ï¿½ï¿½Ä£Îªsï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½Ø³ï¿½Ê¼Îªv
+   {
+      _elem = new T[_capacity = c];
+      for (_size = 0; _size < s; _elem[_size++] = v)
+         ;
+   }                                                                           // s<=c
+   Vector(T const *A, Rank n) { copyFrom(A, 0, n); }                           // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½å¸´ï¿½ï¿½
+   Vector(T const *A, Rank lo, Rank hi) { copyFrom(A, lo, hi); }               // ï¿½ï¿½ï¿½ï¿½
+   Vector(Vector<T> const &V) { copyFrom(V._elem, 0, V._size); }               // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½å¸´ï¿½ï¿½
+   Vector(Vector<T> const &V, Rank lo, Rank hi) { copyFrom(V._elem, lo, hi); } // ï¿½ï¿½ï¿½ï¿½
+   // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+   ~Vector() { delete[] _elem; } // ï¿½Í·ï¿½ï¿½Ú²ï¿½ï¿½Õ¼ï¿½
+   // Ö»ï¿½ï¿½ï¿½ï¿½ï¿½Ê½Ó¿ï¿½
+   Rank size() const { return _size; }                       // ï¿½ï¿½Ä£
+   bool empty() const { return !_size; }                     // ï¿½Ð¿ï¿½
+   Rank find(T const &e) const { return find(e, 0, _size); } // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+   Rank find(T const &e, Rank lo, Rank hi) const;            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+   Rank search(T const &e) const                             // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+   {
+      return (0 >= _size) ? -1 : search(e, 0, _size);
+   }
+   Rank search(T const &e, Rank lo, Rank hi) const; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+   // ï¿½ï¿½Ð´ï¿½ï¿½ï¿½Ê½Ó¿ï¿½
+   T &operator[](Rank r);                               // ï¿½ï¿½ï¿½ï¿½ï¿½Â±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½Ã¸ï¿½Ôªï¿½ï¿½
+   const T &operator[](Rank r) const;                   // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½Ø°æ±¾
+   Vector<T> &operator=(Vector<T> const &);             // ï¿½ï¿½ï¿½Ø¸ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½Ö±ï¿½Ó¿ï¿½Â¡ï¿½ï¿½ï¿½ï¿½
+   T remove(Rank r);                                    // É¾ï¿½ï¿½ï¿½ï¿½Îªrï¿½ï¿½Ôªï¿½ï¿½
+   Rank remove(Rank lo, Rank hi);                       // É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½[lo, hi)Ö®ï¿½Úµï¿½Ôªï¿½ï¿½
+   Rank insert(Rank r, T const &e);                     // ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½
+   Rank insert(T const &e) { return insert(_size, e); } // Ä¬ï¿½ï¿½ï¿½ï¿½ÎªÄ©Ôªï¿½Ø²ï¿½ï¿½ï¿½
+   void sort(Rank lo, Rank hi);                         // ï¿½ï¿½[lo, hi)ï¿½ï¿½ï¿½ï¿½
+   void sort() { sort(0, _size); }                      // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+   void unsort(Rank lo, Rank hi);                       // ï¿½ï¿½[lo, hi)ï¿½ï¿½ï¿½ï¿½
+   void unsort() { unsort(0, _size); }                  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+   Rank deduplicate();                                  // ï¿½ï¿½ï¿½ï¿½È¥ï¿½ï¿½
+   Rank uniquify();                                     // ï¿½ï¿½ï¿½ï¿½È¥ï¿½ï¿½
+   // ï¿½ï¿½ï¿½ï¿½
+   void traverse(void (*)(T &)); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½Ãºï¿½ï¿½ï¿½Ö¸ï¿½ë£¬Ö»ï¿½ï¿½ï¿½ï¿½Ö²ï¿½ï¿½ï¿½ï¿½Þ¸Ä£ï¿½
+   template <typename VST>
+   void traverse(VST &); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½Ãºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ó£¬¿ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸Ä£ï¿½
+};                       // Vector
 
 #include "vector_implementation.h"
