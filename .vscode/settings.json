@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "COMMIT_EDITMSG": "git-commit",
         "iostream": "cpp",
         "array": "cpp",
         "atomic": "cpp",
@@ -40,7 +41,8 @@
         "sstream": "cpp",
         "stdexcept": "cpp",
         "streambuf": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "cstring": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
